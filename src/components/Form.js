@@ -1,5 +1,5 @@
 import { useState } from "react";
-export default function Form({ setItems, handleAddItems }) {
+export default function Form({ setItems, handleAddItems, handleInputChange, searchQuery }) {
     const [description, setDescription] = useState("");
     const [quantity, setQuantity] = useState(1);
     function handleDescription(e) {
@@ -32,6 +32,12 @@ export default function Form({ setItems, handleAddItems }) {
           value={description}
         />
         <button className="button">ADD</button>
+        <input
+          type="text"
+          placeholder="Search for items"
+          onChange={handleInputChange}
+          value={searchQuery}
+        />
       </form>
     );
   }

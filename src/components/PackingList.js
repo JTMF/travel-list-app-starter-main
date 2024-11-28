@@ -1,9 +1,9 @@
-export default function PackingList({ items, handleDeleteItem, handleUpdateItem, sortItems, handleSort }) {
-    const sortedItems = [...items].sort((a, b) => {
+export default function PackingList({ filteredItems, handleDeleteItem, handleUpdateItem, sortItems, handleSort }) {
+    const sortedItems = [...filteredItems].sort((a, b) => {
       switch (sortItems) {
-        case 'description':
+        case "description":
           return a.description.localeCompare(b.description);
-        case 'packed':
+        case "packed":
           return a.packed - b.packed; 
         default:
           return a.id - b.id; 
@@ -23,7 +23,6 @@ export default function PackingList({ items, handleDeleteItem, handleUpdateItem,
           </span>
           <button 
             onClick={() => handleDeleteItem(item.id)} 
-            style={{ marginLeft: "10px", color: "red", border: "none", background: "none", cursor: "pointer", fontSize: "20px" }}
           >
             ❌
           </button>
@@ -33,13 +32,6 @@ export default function PackingList({ items, handleDeleteItem, handleUpdateItem,
     
     return (
       <div className="list">
-        <ul>
-          {sortedItems.map((item) => (
-            <li key={item.id}>
-              <Item item={item} />
-            </li>
-          ))}
-        </ul>
         <div>
           <label>Sort By:</label>
           <select value={sortItems} onChange={handleSort}>
@@ -48,6 +40,13 @@ export default function PackingList({ items, handleDeleteItem, handleUpdateItem,
             <option value="packed">Packed Status</option>
           </select>
         </div>
+        <ul>
+          {sortedItems.map((item) => (
+            <li key={item.id}>
+              <Item item={item} />
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }
